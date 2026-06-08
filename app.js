@@ -8,10 +8,10 @@ App({
     familyInfo: null,
     loginPromise: null, // 登录Promise，用于等待登录完成
     storageManager: storageManager, // 存储管理器实例
-    // 本地开发环境
-    baseUrl: 'http://127.0.0.1:8787'
-    // 正式环境（部署后替换）
-    // baseUrl: 'https://your-domain.com'
+    // API 地址
+    baseUrl: 'https://coinnote-backend.silencehuliang.workers.dev'
+    // 本地开发时使用
+    // baseUrl: 'http://127.0.0.1:8787'
   },
 
   onLaunch() {
