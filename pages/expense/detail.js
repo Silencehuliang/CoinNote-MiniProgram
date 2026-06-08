@@ -22,7 +22,11 @@ Page({
     }
   },
 
-  onLoad(options) {
+  async onLoad(options) {
+    // 等待登录完成
+    if (app.globalData.loginPromise) {
+      await app.globalData.loginPromise;
+    }
     if (options.id) {
       this.setData({ expenseId: options.id });
       this.loadExpenseDetail();

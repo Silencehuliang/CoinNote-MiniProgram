@@ -20,9 +20,13 @@ Page({
     icons: ['🍜', '🚗', '🛍️', '🏠', '🎮', '💊', '📚', '📦', '☕', '🎬', '🎯', '✈️', '💪', '🎓', '📖', '💡', '🔑', '🏢', '🚇', '🚕', '⛽', '🅿️', '👕', '🧴', '📱', '🍪', '🌅', '☀️', '🌙', '🛡️']
   },
 
-  onLoad(options) {
+  async onLoad(options) {
     if (options.mode) {
       this.setData({ mode: options.mode });
+    }
+    // 等待登录完成
+    if (app.globalData.loginPromise) {
+      await app.globalData.loginPromise;
     }
     this.loadData();
   },

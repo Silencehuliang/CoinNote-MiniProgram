@@ -19,7 +19,11 @@ Page({
     editNickname: ''
   },
 
-  onLoad() {
+  async onLoad() {
+    // 等待登录完成
+    if (app.globalData.loginPromise) {
+      await app.globalData.loginPromise;
+    }
     this.loadUserInfo();
     this.loadMyStats();
     this.calculateCacheSize();

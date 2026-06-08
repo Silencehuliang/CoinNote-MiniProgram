@@ -70,31 +70,30 @@ App({
   // 登录
   async login() {
     try {
-      // 本地开发环境使用模拟登录
-      const isDev = this.globalData.baseUrl.includes('127.0.0.1');
       let res;
       
-      if (isDev) {
-        // 本地开发：使用模拟登录
-        res = await this.request({
-          url: '/api/auth/dev-login',
-          method: 'POST'
-        });
-      } else {
-        // 正式环境：使用微信登录
-        const { code } = await wx.login();
-        res = await this.request({
-          url: '/api/auth/wx-login',
-          method: 'POST',
-          data: { code }
-        });
-      }
+      // 开发阶段：使用模拟登录（后续配置真实 AppID 后切换为 wx-login）
+      // TODO: 上线前改为微信登录
+      console.log('开始登录...');
+      res = await this.request({
+        url: '/api/auth/dev-login',
+        method: 'POST'
+      });
+
+      // 正式环境使用微信登录（取消注释下面的代码）
+      // const { code } = await wx.login();
+      // res = await this.request({
+      //   url: '/api/auth/wx-login',
+      //   method: 'POST',
+      //   data: { code }
+      // });
 
       if (res.code === 0) {
         this.globalData.token = res.data.token;
         this.globalData.userInfo = res.data.user;
         wx.setStorageSync('token', res.data.token);
         wx.setStorageSync('userInfo', res.data.user);
+        console.log('登录成功:', res.data.user);
         return res.data;
       }
       throw new Error(res.message);

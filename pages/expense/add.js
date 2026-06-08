@@ -20,8 +20,12 @@ Page({
     showKeyboard: false
   },
 
-  onLoad() {
+  async onLoad() {
     this.initDate();
+    // 等待登录完成
+    if (app.globalData.loginPromise) {
+      await app.globalData.loginPromise;
+    }
     this.loadCategories();
     this.loadTags();
     this.loadFamilyMembers();
