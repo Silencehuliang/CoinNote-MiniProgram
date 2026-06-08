@@ -68,12 +68,17 @@ Page({
     if (this.data.loading) return;
     
     this.setData({ loading: true });
+    console.log('开始加载消费记录...');
+    console.log('当前 token:', app.globalData.token ? '存在' : '不存在');
+    console.log('当前 userInfo:', app.globalData.userInfo);
     
     try {
       const { selectedYear, selectedMonth, page, pageSize } = this.data;
       const startDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
       const endDate = new Date(selectedYear, selectedMonth, 0);
       const endDateStr = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${endDate.getDate()}`;
+      
+      console.log('请求参数:', { startDate, endDate: endDateStr, page, pageSize });
       
       const res = await app.request({
         url: '/api/expenses',
@@ -84,6 +89,8 @@ Page({
           pageSize
         }
       });
+
+      console.log('消费记录响应:', res);
 
       if (res.code === 0) {
         const { list, total } = res.data;
@@ -100,6 +107,8 @@ Page({
           monthCount: total,
           noMore: list.length < pageSize
         });
+        
+        console.log('加载完成，记录数:', total);
       }
     } catch (err) {
       console.error('加载失败:', err);
