@@ -1,33 +1,47 @@
-/* CoinNote - 精致奢华风格 */
+/* CoinNote - 温暖治愈风格 */
 
 /* ==================== 设计系统 ==================== */
 page {
-  /* 黑金色调 - 奢华质感 */
-  --color-bg: #0A0A0A;
-  --color-bg-elevated: #141414;
-  --color-bg-card: #1A1A1A;
-  --color-bg-input: #222222;
+  /* 米白色基调 - 温暖舒适 */
+  --color-bg: #FFF8F0;
+  --color-bg-warm: #FFF5E6;
+  --color-bg-card: #FFFFFF;
+  --color-bg-input: #FFF0E0;
+  --color-bg-hover: #FFE8D0;
   
-  /* 金色系 - 点缀 */
-  --color-accent: #C9A96E;
-  --color-accent-light: #D4B87A;
-  --color-accent-dark: #B8944F;
+  /* 珊瑚橘主色 - 温暖活力 */
+  --color-primary: #FF7E5F;
+  --color-primary-light: #FF9A7B;
+  --color-primary-dark: #E86A4D;
   
-  /* 文字层次 */
-  --color-text-primary: #F5F5F5;
-  --color-text-secondary: #A0A0A0;
-  --color-text-tertiary: #666666;
-  --color-text-disabled: #444444;
+  /* 抹茶绿辅助 - 清新自然 */
+  --color-secondary: #88C9A1;
+  --color-secondary-light: #A5D9B8;
+  --color-secondary-dark: #6DB88A;
   
-  /* 功能色 - 低饱和度 */
-  --color-success: #4CAF50;
-  --color-warning: #FFB74D;
-  --color-danger: #EF5350;
-  --color-info: #42A5F5;
+  /* 支出暖橙 */
+  --color-expense: #FF9A5C;
+  --color-expense-light: #FFB088;
   
-  /* 边框与分割 */
-  --color-border: #2A2A2A;
-  --color-divider: #1F1F1F;
+  /* 收入淡绿 */
+  --color-income: #7BC89C;
+  --color-income-light: #A5D9B8;
+  
+  /* 文字层次 - 柔和不刺眼 */
+  --color-text-primary: #4A3728;
+  --color-text-secondary: #8B7355;
+  --color-text-tertiary: #B8A08A;
+  --color-text-disabled: #D4C4B0;
+  
+  /* 功能色 - 柔和版 */
+  --color-success: #88C9A1;
+  --color-warning: #FFD166;
+  --color-danger: #FF7E7E;
+  --color-info: #7EC8E3;
+  
+  /* 边框与分割 - 温暖灰 */
+  --color-border: #F0E0CC;
+  --color-divider: #F5E6D0;
   
   /* 间距系统 */
   --space-1: 8rpx;
@@ -36,15 +50,18 @@ page {
   --space-4: 32rpx;
   --space-5: 48rpx;
   --space-6: 64rpx;
+  --space-7: 80rpx;
+  --space-8: 96rpx;
   
-  /* 圆角 */
-  --radius-sm: 8rpx;
-  --radius-md: 16rpx;
-  --radius-lg: 24rpx;
-  --radius-xl: 32rpx;
+  /* 鹅卵石圆角 - 大而柔和 */
+  --radius-sm: 16rpx;
+  --radius-md: 24rpx;
+  --radius-lg: 32rpx;
+  --radius-xl: 48rpx;
+  --radius-pill: 999rpx;
   
-  /* 字体 */
-  --font-sans: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  /* 字体 - 圆润友好 */
+  --font-sans: -apple-system, 'SF Pro Rounded', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   
   /* 字号 */
   --text-xs: 22rpx;
@@ -55,34 +72,37 @@ page {
   --text-2xl: 48rpx;
   --text-3xl: 64rpx;
   --text-4xl: 80rpx;
+  --text-5xl: 96rpx;
   
   /* 字重 */
-  --weight-light: 300;
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
+  --weight-bold: 700;
   
-  /* 行高 */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
+  /* 宽松行高 */
+  --leading-tight: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+  --leading-loose: 2.0;
   
-  /* 阴影 */
-  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8rpx 32rpx rgba(0, 0, 0, 0.5);
+  /* 柔和阴影 */
+  --shadow-sm: 0 4rpx 12rpx rgba(255, 126, 95, 0.08);
+  --shadow-md: 0 8rpx 24rpx rgba(255, 126, 95, 0.12);
+  --shadow-lg: 0 16rpx 48rpx rgba(255, 126, 95, 0.16);
   
   /* 过渡 */
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 350ms ease;
+  --transition-fast: 200ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
   
   /* 页面基础 */
   background-color: var(--color-bg);
   font-family: var(--font-sans);
   font-size: var(--text-base);
   color: var(--color-text-primary);
-  line-height: var(--leading-normal);
+  line-height: var(--leading-relaxed);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -94,90 +114,112 @@ page {
 }
 
 .container--padded {
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-6) var(--space-4);
 }
 
-/* ==================== 卡片 ==================== */
+/* ==================== 卡片 - 鹅卵石感 ==================== */
 .card {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  margin-bottom: var(--space-3);
-  border: 1rpx solid var(--color-border);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-spring), box-shadow var(--transition-fast);
 }
 
 .card:active {
   transform: scale(0.98);
+  box-shadow: var(--shadow-md);
 }
 
 .card--flat {
-  border: none;
-  background: transparent;
+  box-shadow: none;
+  background: var(--color-bg-warm);
 }
 
-.card--elevated {
-  box-shadow: var(--shadow-md);
-  border: none;
+.card--warm {
+  background: linear-gradient(135deg, #FFF5E6 0%, #FFE8D0 100%);
 }
 
-/* ==================== 按钮 ==================== */
+.card--primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #FFFFFF;
+}
+
+.card--secondary {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  color: #FFFFFF;
+}
+
+/* ==================== 按钮 - 柔和圆润 ==================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 96rpx;
-  padding: 0 var(--space-5);
-  border-radius: var(--radius-md);
+  height: 100rpx;
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-pill);
   font-size: var(--text-base);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   letter-spacing: 2rpx;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-spring);
   position: relative;
   overflow: hidden;
 }
 
-/* 主按钮 - 金色 */
+/* 主按钮 - 珊瑚橘 */
 .btn--primary {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  color: #000000;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(255, 126, 95, 0.35);
 }
 
 .btn--primary:active {
-  transform: scale(0.97);
-  filter: brightness(0.9);
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 12rpx rgba(255, 126, 95, 0.25);
 }
 
-/* 次要按钮 - 描边 */
+/* 次要按钮 - 抹茶绿 */
 .btn--secondary {
-  background: transparent;
-  color: var(--color-accent);
-  border: 2rpx solid var(--color-accent);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(136, 201, 161, 0.35);
 }
 
 .btn--secondary:active {
-  background: rgba(201, 169, 110, 0.1);
+  transform: scale(0.95);
+}
+
+/* 描边按钮 */
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 3rpx solid var(--color-primary);
+}
+
+.btn--outline:active {
+  background: rgba(255, 126, 95, 0.1);
 }
 
 /* 幽灵按钮 */
 .btn--ghost {
-  background: transparent;
+  background: var(--color-bg-warm);
   color: var(--color-text-secondary);
 }
 
 .btn--ghost:active {
-  color: var(--color-text-primary);
+  background: var(--color-bg-hover);
 }
 
 /* 危险按钮 */
 .btn--danger {
   background: transparent;
   color: var(--color-danger);
-  border: 2rpx solid var(--color-danger);
+  border: 3rpx solid var(--color-danger);
 }
 
 .btn--danger:active {
-  background: rgba(239, 83, 80, 0.1);
+  background: rgba(255, 126, 126, 0.1);
 }
 
 /* 块级按钮 */
@@ -188,31 +230,26 @@ page {
 
 /* 小按钮 */
 .btn--sm {
-  height: 72rpx;
+  height: 80rpx;
   padding: 0 var(--space-4);
   font-size: var(--text-sm);
 }
 
 /* 迷你按钮 */
 .btn--xs {
-  height: 56rpx;
+  height: 64rpx;
   padding: 0 var(--space-3);
   font-size: var(--text-xs);
-  border-radius: var(--radius-sm);
-}
-
-/* 圆角按钮 */
-.btn--round {
-  border-radius: 999rpx;
+  border-radius: var(--radius-lg);
 }
 
 /* 禁用状态 */
 .btn--disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
 }
 
-/* ==================== 输入框 ==================== */
+/* ==================== 输入框 - 柔和温暖 ==================== */
 .input-group {
   margin-bottom: var(--space-4);
 }
@@ -222,30 +259,31 @@ page {
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   margin-bottom: var(--space-2);
-  letter-spacing: 1rpx;
+  font-weight: var(--weight-medium);
 }
 
 .input {
   width: 100%;
-  height: 96rpx;
+  height: 100rpx;
   padding: 0 var(--space-4);
   background: var(--color-bg-input);
-  border: 2rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  border: 3rpx solid transparent;
+  border-radius: var(--radius-lg);
   font-size: var(--text-base);
   color: var(--color-text-primary);
   box-sizing: border-box;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 4rpx rgba(201, 169, 110, 0.15);
+  border-color: var(--color-primary-light);
+  background: var(--color-bg-card);
+  box-shadow: 0 0 0 4rpx rgba(255, 126, 95, 0.1);
 }
 
 .input--textarea {
   height: 200rpx;
-  padding: var(--space-3);
+  padding: var(--space-4);
   line-height: var(--leading-relaxed);
 }
 
@@ -263,20 +301,20 @@ page {
   margin-top: var(--space-1);
 }
 
-/* ==================== 列表 ==================== */
+/* ==================== 列表 - 温暖分隔 ==================== */
 .list {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .list-item {
   display: flex;
   align-items: center;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-4) var(--space-5);
   position: relative;
-  min-height: 112rpx;
+  min-height: 120rpx;
   box-sizing: border-box;
   transition: background var(--transition-fast);
 }
@@ -284,11 +322,12 @@ page {
 .list-item::after {
   content: '';
   position: absolute;
-  left: var(--space-4);
-  right: 0;
+  left: var(--space-5);
+  right: var(--space-5);
   bottom: 0;
-  height: 1rpx;
+  height: 2rpx;
   background: var(--color-divider);
+  border-radius: 1rpx;
 }
 
 .list-item:last-child::after {
@@ -296,7 +335,7 @@ page {
 }
 
 .list-item:active {
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-warm);
 }
 
 .list-item__left {
@@ -313,12 +352,14 @@ page {
 }
 
 .list-item__icon {
-  width: 48rpx;
-  height: 48rpx;
-  margin-right: var(--space-3);
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: var(--space-4);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--color-bg-warm);
+  border-radius: var(--radius-md);
 }
 
 .list-item__content {
@@ -339,46 +380,53 @@ page {
 }
 
 .list-item__value {
-  font-size: var(--text-base);
-  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
   font-feature-settings: "tnum";
 }
 
-.list-item__arrow {
-  width: 32rpx;
-  height: 32rpx;
-  margin-left: var(--space-2);
-  color: var(--color-text-disabled);
+.list-item__value--expense {
+  color: var(--color-expense);
 }
 
-/* ==================== 标签 ==================== */
+.list-item__value--income {
+  color: var(--color-income);
+}
+
+/* ==================== 标签 - 柔和可爱 ==================== */
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: var(--space-1) var(--space-2);
-  background: var(--color-bg-input);
-  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-warm);
+  border-radius: var(--radius-pill);
   font-size: var(--text-xs);
   color: var(--color-text-secondary);
-  margin-right: var(--space-1);
-  margin-bottom: var(--space-1);
+  margin-right: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.tag--primary {
+  background: rgba(255, 126, 95, 0.15);
+  color: var(--color-primary);
+}
+
+.tag--secondary {
+  background: rgba(136, 201, 161, 0.15);
+  color: var(--color-secondary-dark);
 }
 
 .tag--active {
-  background: var(--color-accent);
-  color: #000000;
-}
-
-.tag--outline {
-  background: transparent;
-  border: 1rpx solid var(--color-border);
+  background: var(--color-primary);
+  color: #FFFFFF;
 }
 
 /* ==================== 分割线 ==================== */
 .divider {
-  height: 1rpx;
+  height: 2rpx;
   background: var(--color-divider);
-  margin: var(--space-3) 0;
+  margin: var(--space-4) 0;
+  border-radius: 1rpx;
 }
 
 .divider--with-text {
@@ -392,77 +440,132 @@ page {
 .divider--with-text::after {
   content: '';
   flex: 1;
-  height: 1rpx;
+  height: 2rpx;
   background: var(--color-divider);
+  border-radius: 1rpx;
 }
 
 .divider--with-text::before {
-  margin-right: var(--space-3);
+  margin-right: var(--space-4);
 }
 
 .divider--with-text::after {
-  margin-left: var(--space-3);
+  margin-left: var(--space-4);
 }
 
-/* ==================== 空状态 ==================== */
+/* ==================== 空状态 - 可爱插画风 ==================== */
 .empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-6) var(--space-5);
+  padding: var(--space-8) var(--space-5);
 }
 
-.empty__icon {
-  width: 160rpx;
-  height: 160rpx;
-  margin-bottom: var(--space-4);
-  opacity: 0.3;
+.empty__illustration {
+  width: 320rpx;
+  height: 320rpx;
+  margin-bottom: var(--space-5);
+  position: relative;
+}
+
+/* 手绘风小猪存钱罐占位 */
+.empty__piggy {
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-warm);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 160rpx;
+  box-shadow: var(--shadow-md);
 }
 
 .empty__title {
-  font-size: var(--text-lg);
-  color: var(--color-text-secondary);
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+  font-weight: var(--weight-semibold);
   margin-bottom: var(--space-2);
 }
 
 .empty__desc {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-tertiary);
   text-align: center;
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-6);
   max-width: 480rpx;
+  line-height: var(--leading-loose);
 }
 
-/* ==================== 加载状态 ==================== */
+/* ==================== 加载状态 - 温暖旋转 ==================== */
 .loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-5);
+  padding: var(--space-6);
 }
 
 .loading__spinner {
-  width: 48rpx;
-  height: 48rpx;
-  border: 3rpx solid var(--color-border);
-  border-top-color: var(--color-accent);
+  width: 64rpx;
+  height: 64rpx;
+  border: 4rpx solid var(--color-border);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 1s ease-in-out infinite;
 }
 
 .loading__text {
   font-size: var(--text-sm);
   color: var(--color-text-tertiary);
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* ==================== 弹窗 ==================== */
+/* ==================== 成功提示 - 微笑表情 ==================== */
+.success-toast {
+  position: fixed;
+  bottom: calc(200rpx + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(100rpx);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-6);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  opacity: 0;
+  transition: all var(--transition-spring);
+  z-index: 1000;
+}
+
+.success-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.success-toast__emoji {
+  font-size: var(--text-3xl);
+  animation: bounce 0.6s ease infinite;
+}
+
+.success-toast__text {
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  font-weight: var(--weight-medium);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
+}
+
+/* ==================== 弹窗 - 温暖圆润 ==================== */
 .modal {
   position: fixed;
   top: 0;
@@ -481,7 +584,7 @@ page {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(74, 55, 40, 0.5);
   backdrop-filter: blur(10px);
 }
 
@@ -491,25 +594,25 @@ page {
   max-width: 640rpx;
   background: var(--color-bg-card);
   border-radius: var(--radius-xl);
-  border: 1rpx solid var(--color-border);
   overflow: hidden;
   z-index: 1;
+  box-shadow: var(--shadow-lg);
 }
 
 .modal__header {
-  padding: var(--space-5) var(--space-4) var(--space-3);
+  padding: var(--space-6) var(--space-5) var(--space-4);
   text-align: center;
 }
 
 .modal__title {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   color: var(--color-text-primary);
 }
 
 .modal__body {
-  padding: 0 var(--space-4) var(--space-4);
-  font-size: var(--text-sm);
+  padding: 0 var(--space-5) var(--space-5);
+  font-size: var(--text-base);
   color: var(--color-text-secondary);
   text-align: center;
   line-height: var(--leading-relaxed);
@@ -517,22 +620,22 @@ page {
 
 .modal__footer {
   display: flex;
-  border-top: 1rpx solid var(--color-divider);
+  border-top: 2rpx solid var(--color-divider);
 }
 
 .modal__btn {
   flex: 1;
-  height: 112rpx;
+  height: 120rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--text-base);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   transition: background var(--transition-fast);
 }
 
 .modal__btn:active {
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-warm);
 }
 
 .modal__btn--default {
@@ -540,7 +643,7 @@ page {
 }
 
 .modal__btn--primary {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .modal__btn--danger {
@@ -548,45 +651,43 @@ page {
 }
 
 .modal__btn + .modal__btn {
-  border-left: 1rpx solid var(--color-divider);
+  border-left: 2rpx solid var(--color-divider);
 }
 
-/* ==================== 浮动按钮 ==================== */
+/* ==================== 浮动按钮 - 可爱圆形 ==================== */
 .fab {
   position: fixed;
-  right: var(--space-4);
+  right: var(--space-5);
   bottom: calc(200rpx + env(safe-area-inset-bottom));
-  width: 112rpx;
-  height: 112rpx;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 32rpx rgba(201, 169, 110, 0.4);
+  box-shadow: 0 12rpx 36rpx rgba(255, 126, 95, 0.45);
   z-index: 100;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: all var(--transition-spring);
 }
 
 .fab:active {
-  transform: scale(0.95);
-  box-shadow: 0 4rpx 16rpx rgba(201, 169, 110, 0.3);
+  transform: scale(0.9) rotate(90deg);
 }
 
 .fab__icon {
-  font-size: 56rpx;
-  color: #000000;
-  font-weight: var(--weight-light);
+  font-size: 60rpx;
+  color: #FFFFFF;
+  font-weight: var(--weight-normal);
 }
 
-/* ==================== 顶部标签 ==================== */
+/* ==================== 顶部标签 - 柔和切换 ==================== */
 .tabs {
   display: flex;
-  background: var(--color-bg-card);
-  border-radius: var(--radius-lg);
+  background: var(--color-bg-warm);
+  border-radius: var(--radius-pill);
   padding: var(--space-1);
-  margin-bottom: var(--space-4);
-  border: 1rpx solid var(--color-border);
+  margin-bottom: var(--space-5);
 }
 
 .tab {
@@ -594,42 +695,44 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80rpx;
+  height: 88rpx;
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-spring);
 }
 
 .tab--active {
-  background: var(--color-accent);
-  color: #000000;
-  font-weight: var(--weight-medium);
+  background: var(--color-bg-card);
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+  box-shadow: var(--shadow-sm);
 }
 
-/* ==================== 头像 ==================== */
+/* ==================== 头像 - 圆形温暖 ==================== */
 .avatar {
-  width: 80rpx;
-  height: 80rpx;
+  width: 88rpx;
+  height: 88rpx;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--color-bg-input);
-  border: 2rpx solid var(--color-border);
+  background: var(--color-bg-warm);
+  border: 4rpx solid var(--color-bg-card);
+  box-shadow: var(--shadow-sm);
 }
 
 .avatar--sm {
-  width: 56rpx;
-  height: 56rpx;
+  width: 64rpx;
+  height: 64rpx;
 }
 
 .avatar--lg {
-  width: 120rpx;
-  height: 120rpx;
+  width: 128rpx;
+  height: 128rpx;
 }
 
 .avatar--xl {
-  width: 160rpx;
-  height: 160rpx;
+  width: 180rpx;
+  height: 180rpx;
 }
 
 .avatar image {
@@ -637,39 +740,39 @@ page {
   height: 100%;
 }
 
-/* ==================== 进度条 ==================== */
+/* ==================== 进度条 - 温暖渐变 ==================== */
 .progress {
-  height: 8rpx;
-  background: var(--color-bg-input);
-  border-radius: 4rpx;
+  height: 16rpx;
+  background: var(--color-bg-warm);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .progress__bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-accent-dark) 0%, var(--color-accent) 100%);
-  border-radius: 4rpx;
+  background: linear-gradient(90deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+  border-radius: var(--radius-pill);
   transition: width var(--transition-slow);
 }
 
-/* ==================== 徽标 ==================== */
+/* ==================== 徽标 - 小圆点 ==================== */
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36rpx;
-  height: 36rpx;
-  padding: 0 var(--space-1);
-  background: var(--color-accent);
-  border-radius: 999rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  padding: 0 var(--space-2);
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
   font-size: var(--text-xs);
-  color: #000000;
-  font-weight: var(--weight-medium);
+  color: #FFFFFF;
+  font-weight: var(--weight-semibold);
 }
 
 .badge--dot {
-  min-width: 16rpx;
-  height: 16rpx;
+  min-width: 20rpx;
+  height: 20rpx;
   padding: 0;
 }
 
@@ -680,19 +783,21 @@ page {
 .text-right { text-align: right; }
 .text-left { text-align: left; }
 
-.text-primary { color: var(--color-accent); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-expense { color: var(--color-expense); }
+.text-income { color: var(--color-income); }
 .text-success { color: var(--color-success); }
 .text-warning { color: var(--color-warning); }
 .text-danger { color: var(--color-danger); }
 .text-info { color: var(--color-info); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-tertiary { color: var(--color-text-tertiary); }
+.text-muted { color: var(--color-text-tertiary); }
 .text-disabled { color: var(--color-text-disabled); }
 
-.font-light { font-weight: var(--weight-light); }
 .font-normal { font-weight: var(--weight-normal); }
 .font-medium { font-weight: var(--weight-medium); }
 .font-semibold { font-weight: var(--weight-semibold); }
+.font-bold { font-weight: var(--weight-bold); }
 
 .text-xs { font-size: var(--text-xs); }
 .text-sm { font-size: var(--text-sm); }
@@ -702,6 +807,7 @@ page {
 .text-2xl { font-size: var(--text-2xl); }
 .text-3xl { font-size: var(--text-3xl); }
 .text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
 
 /* 间距 */
 .m-0 { margin: 0; }
@@ -710,6 +816,7 @@ page {
 .m-3 { margin: var(--space-3); }
 .m-4 { margin: var(--space-4); }
 .m-5 { margin: var(--space-5); }
+.m-6 { margin: var(--space-6); }
 
 .mt-0 { margin-top: 0; }
 .mt-1 { margin-top: var(--space-1); }
@@ -717,6 +824,7 @@ page {
 .mt-3 { margin-top: var(--space-3); }
 .mt-4 { margin-top: var(--space-4); }
 .mt-5 { margin-top: var(--space-5); }
+.mt-6 { margin-top: var(--space-6); }
 
 .mb-0 { margin-bottom: 0; }
 .mb-1 { margin-bottom: var(--space-1); }
@@ -724,16 +832,19 @@ page {
 .mb-3 { margin-bottom: var(--space-3); }
 .mb-4 { margin-bottom: var(--space-4); }
 .mb-5 { margin-bottom: var(--space-5); }
+.mb-6 { margin-bottom: var(--space-6); }
 
 .ml-1 { margin-left: var(--space-1); }
 .ml-2 { margin-left: var(--space-2); }
 .ml-3 { margin-left: var(--space-3); }
 .ml-4 { margin-left: var(--space-4); }
+.ml-5 { margin-left: var(--space-5); }
 
 .mr-1 { margin-right: var(--space-1); }
 .mr-2 { margin-right: var(--space-2); }
 .mr-3 { margin-right: var(--space-3); }
 .mr-4 { margin-right: var(--space-4); }
+.mr-5 { margin-right: var(--space-5); }
 
 .p-0 { padding: 0; }
 .p-1 { padding: var(--space-1); }
@@ -741,24 +852,29 @@ page {
 .p-3 { padding: var(--space-3); }
 .p-4 { padding: var(--space-4); }
 .p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
 
 .pt-1 { padding-top: var(--space-1); }
 .pt-2 { padding-top: var(--space-2); }
 .pt-3 { padding-top: var(--space-3); }
 .pt-4 { padding-top: var(--space-4); }
+.pt-5 { padding-top: var(--space-5); }
 
 .pb-1 { padding-bottom: var(--space-1); }
 .pb-2 { padding-bottom: var(--space-2); }
 .pb-3 { padding-bottom: var(--space-3); }
 .pb-4 { padding-bottom: var(--space-4); }
+.pb-5 { padding-bottom: var(--space-5); }
 
 .px-2 { padding-left: var(--space-2); padding-right: var(--space-2); }
 .px-3 { padding-left: var(--space-3); padding-right: var(--space-3); }
 .px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+.px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
 
 .py-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
 .py-3 { padding-top: var(--space-3); padding-bottom: var(--space-3); }
 .py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
 
 /* Flex */
 .flex { display: flex; }
@@ -778,6 +894,7 @@ page {
 .rounded-md { border-radius: var(--radius-md); }
 .rounded-lg { border-radius: var(--radius-lg); }
 .rounded-xl { border-radius: var(--radius-xl); }
+.rounded-pill { border-radius: var(--radius-pill); }
 .rounded-full { border-radius: 50%; }
 
 /* 阴影 */
@@ -817,7 +934,7 @@ page {
 }
 
 .slide-up {
-  animation: slideUp var(--transition-normal) ease-out;
+  animation: slideUp var(--transition-spring) ease-out;
 }
 
 @keyframes slideUp {
@@ -826,10 +943,20 @@ page {
 }
 
 .scale-in {
-  animation: scaleIn var(--transition-fast) ease-out;
+  animation: scaleIn var(--transition-spring) ease-out;
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
+  from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounceIn var(--transition-spring) ease-out;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
 }

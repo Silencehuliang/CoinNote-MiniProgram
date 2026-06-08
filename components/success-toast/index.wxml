@@ -1,0 +1,5 @@
+<!-- 成功提示组件 - 温暖治愈风格 -->
+<view class="success-toast {{visible ? 'show' : ''}}" wx:if="{{visible}}">
+  <text class="success-toast__emoji">{{emoji}}</text>
+  <text class="success-toast__text">{{text}}</text>
+</view>

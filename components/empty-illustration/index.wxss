@@ -1,0 +1,150 @@
+/* 空状态插画组件 - 手绘风格 */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 96rpx 64rpx;
+}
+
+.empty__illustration {
+  width: 320rpx;
+  height: 320rpx;
+  margin-bottom: 48rpx;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20rpx); }
+}
+
+/* 小猪存钱罐 */
+.empty__piggy {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FFE8D0 0%, #FFF5E6 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16rpx 48rpx rgba(255, 126, 95, 0.2);
+}
+
+.piggy-emoji {
+  font-size: 160rpx;
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* 记账的猫 */
+.empty__cat {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16rpx 48rpx rgba(136, 201, 161, 0.2);
+}
+
+.cat-emoji {
+  font-size: 160rpx;
+}
+
+.empty__notepad {
+  position: absolute;
+  bottom: 20rpx;
+  right: 10rpx;
+  font-size: 60rpx;
+  animation: write 1.5s ease-in-out infinite;
+}
+
+@keyframes write {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* 钱包 */
+.empty__wallet {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16rpx 48rpx rgba(255, 152, 0, 0.2);
+}
+
+.wallet-emoji {
+  font-size: 160rpx;
+}
+
+/* 默认 */
+.empty__default {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.default-emoji {
+  font-size: 160rpx;
+}
+
+/* 装饰星星 */
+.empty__sparkle {
+  position: absolute;
+  font-size: 40rpx;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: -20rpx;
+  right: 20rpx;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  bottom: 30rpx;
+  left: -10rpx;
+  animation-delay: 0.5s;
+}
+
+.sparkle-3 {
+  top: 40rpx;
+  left: -20rpx;
+  animation-delay: 1s;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.empty__title {
+  font-size: 36rpx;
+  color: #4A3728;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.empty__desc {
+  font-size: 28rpx;
+  color: #8B7355;
+  text-align: center;
+  max-width: 480rpx;
+  line-height: 1.8;
+}

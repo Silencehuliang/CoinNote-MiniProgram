@@ -1,0 +1,44 @@
+<!-- 空状态插画组件 - 手绘风格 -->
+<view class="empty">
+  <!-- 手绘风小猪存钱罐 -->
+  <view class="empty__illustration" wx:if="{{type === 'piggy'}}">
+    <view class="empty__piggy">
+      <text class="piggy-emoji">🐷</text>
+    </view>
+    <!-- 装饰元素 -->
+    <view class="empty__sparkle sparkle-1">✨</view>
+    <view class="empty__sparkle sparkle-2">💫</view>
+    <view class="empty__sparkle sparkle-3">⭐</view>
+  </view>
+
+  <!-- 记账的猫 -->
+  <view class="empty__illustration" wx:if="{{type === 'cat'}}">
+    <view class="empty__cat">
+      <text class="cat-emoji">🐱</text>
+    </view>
+    <view class="empty__notepad">📝</view>
+    <view class="empty__sparkle sparkle-1">✨</view>
+    <view class="empty__sparkle sparkle-2">💭</view>
+  </view>
+
+  <!-- 钱包 -->
+  <view class="empty__illustration" wx:if="{{type === 'wallet'}}">
+    <view class="empty__wallet">
+      <text class="wallet-emoji">👛</text>
+    </view>
+    <view class="empty__sparkle sparkle-1">💰</view>
+    <view class="empty__sparkle sparkle-2">✨</view>
+  </view>
+
+  <!-- 默认 -->
+  <view class="empty__illustration" wx:if="{{type === 'default'}}">
+    <view class="empty__default">
+      <text class="default-emoji">📭</text>
+    </view>
+  </view>
+
+  <text class="empty__title">{{title}}</text>
+  <text class="empty__desc">{{desc}}</text>
+  
+  <slot></slot>
+</view>
