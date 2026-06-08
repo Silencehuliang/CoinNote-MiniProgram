@@ -8,8 +8,8 @@ App({
     familyInfo: null,
     loginPromise: null, // 登录Promise，用于等待登录完成
     storageManager: storageManager, // 存储管理器实例
-    // API 地址
-    baseUrl: 'https://coinnote-backend.silencehuliang.workers.dev'
+    // API 地址（自定义域名）
+    baseUrl: 'https://silencehl.eu.org'
     // 本地开发时使用
     // baseUrl: 'http://127.0.0.1:8787'
   },
