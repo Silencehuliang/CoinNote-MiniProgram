@@ -199,19 +199,25 @@ Page({
   async loadCategoryStats() {
     try {
       const { startDate, endDate } = this.data;
+      console.log('加载分类统计:', { startDate, endDate });
+      
       const res = await app.request({
         url: '/api/stats/by-category',
         data: { startDate, endDate }
       });
 
-      if (res.code === 0) {
-        this.setData({
-          categoryStats: res.data.items.map(item => ({
-            ...item,
-            percentage: item.percentage.toFixed(1)
-          }))
-        });
-        this.drawPieChart();
+      console.log('分类统计响应:', res);
+
+      if (res.code === 0 && res.data && res.data.items) {
+        const categoryStats = res.data.items.map(item => ({
+          ...item,
+          percentage: Number(item.percentage || 0).toFixed(1)
+        }));
+        console.log('设置分类统计:', categoryStats);
+        this.setData({ categoryStats });
+      } else {
+        console.log('分类统计数据为空或格式不对');
+        this.setData({ categoryStats: [] });
       }
     } catch (err) {
       console.error('加载分类统计失败:', err);
