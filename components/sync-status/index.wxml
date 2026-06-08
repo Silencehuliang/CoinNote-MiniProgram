@@ -1,0 +1,18 @@
+<!-- 同步状态组件 -->
+<view class="sync-status {{showStatus ? 'show' : ''}}" wx:if="{{showStatus}}">
+  <!-- 离线状态 -->
+  <view class="status-bar offline" wx:if="{{!isOnline}}">
+    <view class="status-icon">📡</view>
+    <text class="status-text">离线模式</text>
+    <text class="status-desc">数据已保存在本地</text>
+  </view>
+  
+  <!-- 待同步状态 -->
+  <view class="status-bar pending" wx:if="{{isOnline && pendingCount > 0}}">
+    <view class="status-icon syncing">🔄</view>
+    <text class="status-text">{{pendingCount}}条记录待同步</text>
+    <view class="sync-btn" bindtap="onSyncTap">
+      <text>立即同步</text>
+    </view>
+  </view>
+</view>

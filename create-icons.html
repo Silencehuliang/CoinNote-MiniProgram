@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate TabBar Icons</title>
+</head>
+<body>
+  <canvas id="canvas" width="81" height="81"></canvas>
+  <script>
+    const icons = {
+      bill: {
+        normal: (ctx) => {
+          ctx.strokeStyle = '#999999';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          // 文档图标
+          ctx.strokeRect(20, 12, 41, 57);
+          ctx.beginPath();
+          ctx.moveTo(30, 28);
+          ctx.lineTo(51, 28);
+          ctx.moveTo(30, 38);
+          ctx.lineTo(51, 38);
+          ctx.moveTo(30, 48);
+          ctx.lineTo(45, 48);
+          ctx.stroke();
+        },
+        active: (ctx) => {
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.strokeRect(20, 12, 41, 57);
+          ctx.beginPath();
+          ctx.moveTo(30, 28);
+          ctx.lineTo(51, 28);
+          ctx.moveTo(30, 38);
+          ctx.lineTo(51, 38);
+          ctx.moveTo(30, 48);
+          ctx.lineTo(45, 48);
+          ctx.stroke();
+        }
+      },
+      stats: {
+        normal: (ctx) => {
+          ctx.strokeStyle = '#999999';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          // 柱状图
+          ctx.beginPath();
+          ctx.moveTo(15, 65);
+          ctx.lineTo(66, 65);
+          ctx.stroke();
+          ctx.fillStyle = '#999999';
+          ctx.fillRect(22, 35, 10, 30);
+          ctx.fillRect(36, 20, 10, 45);
+          ctx.fillRect(50, 40, 10, 25);
+        },
+        active: (ctx) => {
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(15, 65);
+          ctx.lineTo(66, 65);
+          ctx.stroke();
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(22, 35, 10, 30);
+          ctx.fillRect(36, 20, 10, 45);
+          ctx.fillRect(50, 40, 10, 25);
+        }
+      },
+      family: {
+        normal: (ctx) => {
+          ctx.strokeStyle = '#999999';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          // 家庭图标
+          ctx.beginPath();
+          ctx.moveTo(40, 15);
+          ctx.lineTo(15, 38);
+          ctx.lineTo(22, 38);
+          ctx.lineTo(22, 62);
+          ctx.lineTo(58, 62);
+          ctx.lineTo(58, 38);
+          ctx.lineTo(65, 38);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.strokeRect(33, 45, 15, 17);
+        },
+        active: (ctx) => {
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(40, 15);
+          ctx.lineTo(15, 38);
+          ctx.lineTo(22, 38);
+          ctx.lineTo(22, 62);
+          ctx.lineTo(58, 62);
+          ctx.lineTo(58, 38);
+          ctx.lineTo(65, 38);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.strokeRect(33, 45, 15, 17);
+        }
+      },
+      profile: {
+        normal: (ctx) => {
+          ctx.strokeStyle = '#999999';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          // 人物图标
+          ctx.beginPath();
+          ctx.arc(40, 28, 12, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(18, 65);
+          ctx.quadraticCurveTo(18, 45, 40, 45);
+          ctx.quadraticCurveTo(62, 45, 62, 65);
+          ctx.stroke();
+        },
+        active: (ctx) => {
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.arc(40, 28, 12, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(18, 65);
+          ctx.quadraticCurveTo(18, 45, 40, 45);
+          ctx.quadraticCurveTo(62, 45, 62, 65);
+          ctx.stroke();
+        }
+      }
+    };
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 生成并下载图标
+    Object.entries(icons).forEach(([name, drawFns]) => {
+      ['normal', 'active'].forEach(type => {
+        ctx.clearRect(0, 0, 81, 81);
+        drawFns[type](ctx);
+        const link = document.createElement('a');
+        link.download = `${name}${type === 'active' ? '-active' : ''}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html>

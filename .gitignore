@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+miniprogram_npm/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.temp

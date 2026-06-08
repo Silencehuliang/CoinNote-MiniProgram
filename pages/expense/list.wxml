@@ -1,0 +1,183 @@
+<!-- pages/expense/list.wxml -->
+<view class="container container--gray">
+  <!-- 筛选条件 -->
+  <view class="filter-section card">
+    <scroll-view class="filter-scroll" scroll-x enable-flex>
+      <view class="filter-list">
+        <!-- 时间筛选 -->
+        <view class="filter-item" bindtap="showDatePicker">
+          <text class="filter-text">{{dateRangeText}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+        
+        <!-- 分类筛选 -->
+        <view class="filter-item {{selectedCategory ? 'active' : ''}}" bindtap="showCategoryPicker">
+          <text class="filter-text">{{selectedCategoryName || '分类'}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+        
+        <!-- 标签筛选 -->
+        <view class="filter-item {{selectedTag ? 'active' : ''}}" bindtap="showTagPicker">
+          <text class="filter-text">{{selectedTagName || '标签'}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+        
+        <!-- 成员筛选 -->
+        <view class="filter-item {{selectedUser ? 'active' : ''}}" bindtap="showUserPicker" wx:if="{{familyMembers.length > 0}}">
+          <text class="filter-text">{{selectedUserName || '成员'}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+      </view>
+    </scroll-view>
+    
+    <!-- 清除筛选 -->
+    <view class="clear-filter" bindtap="clearFilter" wx:if="{{hasFilter}}">
+      <text>清除筛选</text>
+    </view>
+  </view>
+
+  <!-- 消费列表 -->
+  <view class="expense-list">
+    <block wx:for="{{expenseList}}" wx:key="date">
+      <view class="date-group">
+        <view class="date-header">
+          <text class="date-text">{{item.date}}</text>
+          <text class="date-total">¥{{item.total}}</text>
+        </view>
+        <view class="date-items card card--flat">
+          <block wx:for="{{item.expenses}}" wx:for-item="expense" wx:key="id">
+            <view class="expense-item" bindtap="goToDetail" data-id="{{expense.id}}">
+              <view class="expense-icon">
+                <text class="icon-emoji">{{expense.categoryIcon}}</text>
+              </view>
+              <view class="expense-info">
+                <view class="expense-main">
+                  <text class="expense-category">{{expense.categoryName}}</text>
+                  <text class="expense-amount">-¥{{expense.amount}}</text>
+                </view>
+                <view class="expense-sub">
+                  <text class="expense-desc">{{expense.description || expense.subCategoryName}}</text>
+                  <text class="expense-user" wx:if="{{expense.userName}}">{{expense.userName}}</text>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载更多 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!loading && expenseList.length === 0}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">暂无消费记录</text>
+    </view>
+
+    <!-- 加载完成 -->
+    <view class="load-end" wx:if="{{!loading && noMore && expenseList.length > 0}}">
+      <text class="load-end-text">— 已加载全部 —</text>
+    </view>
+  </view>
+</view>
+
+<!-- 日期选择器弹窗 -->
+<view class="picker-mask" wx:if="{{showDatePickerModal}}" bindtap="hideDatePicker">
+  <view class="picker-content" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择日期范围</text>
+      <text class="picker-close" bindtap="hideDatePicker">✕</text>
+    </view>
+    <view class="date-range">
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+        <view class="date-item">
+          <text class="date-label">开始</text>
+          <text class="date-value">{{startDate}}</text>
+        </view>
+      </picker>
+      <text class="range-divider">至</text>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+        <view class="date-item">
+          <text class="date-label">结束</text>
+          <text class="date-value">{{endDate}}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="quick-dates">
+      <view class="quick-item" bindtap="setQuickDate" data-range="today">今天</view>
+      <view class="quick-item" bindtap="setQuickDate" data-range="week">本周</view>
+      <view class="quick-item" bindtap="setQuickDate" data-range="month">本月</view>
+      <view class="quick-item" bindtap="setQuickDate" data-range="year">本年</view>
+    </view>
+    <view class="picker-footer">
+      <view class="btn btn--primary btn--block" bindtap="confirmDate">
+        <text>确定</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 分类选择器弹窗 -->
+<view class="picker-mask" wx:if="{{showCategoryModal}}" bindtap="hideCategoryPicker">
+  <view class="picker-content" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择分类</text>
+      <text class="picker-close" bindtap="hideCategoryPicker">✕</text>
+    </view>
+    <scroll-view class="picker-list" scroll-y>
+      <view class="picker-item {{!selectedCategory ? 'active' : ''}}" bindtap="selectCategory" data-id="">
+        <text>全部分类</text>
+      </view>
+      <view class="picker-item {{item.id === selectedCategory ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="id"
+            bindtap="selectCategory" data-id="{{item.id}}">
+        <text class="item-icon">{{item.icon}}</text>
+        <text class="item-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 标签选择器弹窗 -->
+<view class="picker-mask" wx:if="{{showTagModal}}" bindtap="hideTagPicker">
+  <view class="picker-content" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择标签</text>
+      <text class="picker-close" bindtap="hideTagPicker">✕</text>
+    </view>
+    <scroll-view class="picker-list" scroll-y>
+      <view class="picker-item {{!selectedTag ? 'active' : ''}}" bindtap="selectTag" data-id="">
+        <text>全部标签</text>
+      </view>
+      <view class="picker-item {{item.id === selectedTag ? 'active' : ''}}" 
+            wx:for="{{tags}}" wx:key="id"
+            bindtap="selectTag" data-id="{{item.id}}">
+        <text class="item-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 成员选择器弹窗 -->
+<view class="picker-mask" wx:if="{{showUserModal}}" bindtap="hideUserPicker">
+  <view class="picker-content" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择成员</text>
+      <text class="picker-close" bindtap="hideUserPicker">✕</text>
+    </view>
+    <scroll-view class="picker-list" scroll-y>
+      <view class="picker-item {{!selectedUser ? 'active' : ''}}" bindtap="selectUser" data-id="">
+        <text>全部成员</text>
+      </view>
+      <view class="picker-item {{item.id === selectedUser ? 'active' : ''}}" 
+            wx:for="{{familyMembers}}" wx:key="id"
+            bindtap="selectUser" data-id="{{item.id}}">
+        <image class="item-avatar" src="{{item.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <text class="item-name">{{item.nickname}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,105 @@
+/* pages/expense/detail.wxss */
+
+/* 金额区域 */
+.amount-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.amount-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.category-icon {
+  font-size: 48rpx;
+  margin-right: 16rpx;
+}
+
+.category-name {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.amount-value {
+  font-size: 72rpx;
+  font-weight: 300;
+  font-feature-settings: "tnum";
+  letter-spacing: 2rpx;
+}
+
+/* 详细信息 */
+.detail-section {
+  padding: 32rpx 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 26rpx;
+  color: var(--color-text-muted);
+  min-width: 120rpx;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  text-align: right;
+  flex: 1;
+  margin-left: 32rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8rpx;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 4rpx 16rpx;
+  background: var(--color-bg);
+  border-radius: 4rpx;
+  font-size: 22rpx;
+  color: var(--color-text-light);
+}
+
+/* 操作按钮 */
+.action-section {
+  margin-top: 64rpx;
+  padding-bottom: 64rpx;
+}
+
+.mt-lg {
+  margin-top: 32rpx;
+}

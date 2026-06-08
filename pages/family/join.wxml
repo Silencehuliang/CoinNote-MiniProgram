@@ -1,0 +1,31 @@
+<!-- pages/family/join.wxml -->
+<view class="container container--white">
+  <view class="join-content">
+    <view class="join-icon">
+      <text class="icon-text">👨‍👩‍👧‍👦</text>
+    </view>
+    
+    <view class="join-info">
+      <text class="join-title">邀请你加入家庭</text>
+      <text class="family-name" wx:if="{{familyName}}">{{familyName}}</text>
+    </view>
+
+    <!-- 未登录状态 -->
+    <view class="login-section" wx:if="{{!isLoggedIn}}">
+      <text class="login-desc">需要先登录才能加入家庭</text>
+      <view class="btn btn--primary btn--block" bindtap="login">
+        <text>微信登录</text>
+      </view>
+    </view>
+
+    <!-- 已登录状态 -->
+    <view class="join-section" wx:if="{{isLoggedIn}}">
+      <view class="btn btn--primary btn--block" bindtap="joinFamily" disabled="{{joining}}">
+        <text>{{joining ? '加入中...' : '加入家庭'}}</text>
+      </view>
+      <view class="btn btn--ghost btn--block mt-lg" bindtap="goHome">
+        <text>暂不加入</text>
+      </view>
+    </view>
+  </view>
+</view>

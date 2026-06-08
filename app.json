@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/expense/add",
+    "pages/expense/detail",
+    "pages/expense/list",
+    "pages/category/index",
+    "pages/family/index",
+    "pages/family/join",
+    "pages/stats/index",
+    "pages/profile/index",
+    "pages/import/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "记账本",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5"
+  },
+  "tabBar": {
+    "color": "#B2BEC3",
+    "selectedColor": "#6C5CE7",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "账单",
+        "iconPath": "assets/icons/bill.png",
+        "selectedIconPath": "assets/icons/bill-active.png"
+      },
+      {
+        "pagePath": "pages/stats/index",
+        "text": "统计",
+        "iconPath": "assets/icons/stats.png",
+        "selectedIconPath": "assets/icons/stats-active.png"
+      },
+      {
+        "pagePath": "pages/family/index",
+        "text": "家庭",
+        "iconPath": "assets/icons/family.png",
+        "selectedIconPath": "assets/icons/family-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

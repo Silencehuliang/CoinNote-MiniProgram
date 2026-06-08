@@ -1,0 +1,156 @@
+<!-- pages/profile/index.wxml -->
+<view class="container container--gray">
+  <!-- 用户信息卡片 -->
+  <view class="user-card card">
+    <view class="user-info">
+      <image class="user-avatar" src="{{userInfo.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+      <view class="user-detail">
+        <text class="user-name">{{userInfo.nickname || '未登录'}}</text>
+        <text class="user-family" wx:if="{{familyInfo}}">{{familyInfo.name}}</text>
+        <text class="user-id" wx:if="{{!familyInfo}}">未加入家庭</text>
+      </view>
+    </view>
+    <view class="edit-btn" bindtap="editProfile">
+      <text>编辑</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-card card">
+    <view class="stats-header">
+      <text class="stats-title">我的数据</text>
+      <text class="stats-period">本月</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">¥{{myStats.totalAmount}}</text>
+        <text class="stat-label">总支出</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{myStats.totalCount}}</text>
+        <text class="stat-label">记录笔数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">¥{{myStats.dailyAvg}}</text>
+        <text class="stat-label">日均消费</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{myStats.days}}</text>
+        <text class="stat-label">记录天数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-card card">
+    <view class="menu-item" bindtap="goToCategory">
+      <view class="menu-left">
+        <text class="menu-icon">📂</text>
+        <text class="menu-text">分类管理</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToTag">
+      <view class="menu-left">
+        <text class="menu-icon">🏷️</text>
+        <text class="menu-text">标签管理</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToExport">
+      <view class="menu-left">
+        <text class="menu-icon">📊</text>
+        <text class="menu-text">数据导出</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToImport">
+      <view class="menu-left">
+        <text class="menu-icon">📥</text>
+        <text class="menu-text">数据导入</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 其他设置 -->
+  <view class="menu-card card">
+    <view class="menu-item" bindtap="showAbout">
+      <view class="menu-left">
+        <text class="menu-icon">ℹ️</text>
+        <text class="menu-text">关于我们</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="showFeedback">
+      <view class="menu-left">
+        <text class="menu-icon">💬</text>
+        <text class="menu-text">意见反馈</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="clearCache">
+      <view class="menu-left">
+        <text class="menu-icon">🗑️</text>
+        <text class="menu-text">清除缓存</text>
+      </view>
+      <text class="menu-value">{{cacheSize}}</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{isLoggedIn}}">
+    <view class="btn btn--ghost btn--block" bindtap="logout">
+      <text>退出登录</text>
+    </view>
+  </view>
+
+  <!-- 版本号 -->
+  <view class="version">
+    <text>版本 {{version}}</text>
+  </view>
+</view>
+
+<!-- 编辑资料弹窗 -->
+<view class="modal-mask" wx:if="{{showEditModal}}" bindtap="hideEditModal">
+  <view class="modal" catchtap="noop">
+    <view class="modal-header">
+      <text class="modal-title">编辑资料</text>
+      <text class="modal-close" bindtap="hideEditModal">✕</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">昵称</text>
+        <input class="input" value="{{editNickname}}" placeholder="请输入昵称" bindinput="onNicknameInput" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="btn btn--primary btn--block" bindtap="saveProfile">
+        <text>保存</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 关于弹窗 -->
+<view class="modal-mask" wx:if="{{showAboutModal}}" bindtap="hideAboutModal">
+  <view class="modal" catchtap="noop">
+    <view class="modal-header">
+      <text class="modal-title">关于我们</text>
+      <text class="modal-close" bindtap="hideAboutModal">✕</text>
+    </view>
+    <view class="modal-body about-content">
+      <view class="about-logo">
+        <text class="logo-text">记账本</text>
+      </view>
+      <text class="about-desc">一款简洁优雅的家庭记账小程序</text>
+      <text class="about-version">版本 {{version}}</text>
+      <view class="about-features">
+        <text class="feature-item">• 简洁易用的记账体验</text>
+        <text class="feature-item">• 家庭成员共同记录</text>
+        <text class="feature-item">• 多维度消费统计</text>
+        <text class="feature-item">• Excel数据导入导出</text>
+      </view>
+    </view>
+  </view>
+</view>

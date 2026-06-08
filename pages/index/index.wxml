@@ -1,0 +1,116 @@
+<!-- pages/index/index.wxml -->
+<!-- 同步状态提示 -->
+<sync-status></sync-status>
+
+<view class="container container--gray">
+  <!-- 头部统计 -->
+  <view class="header card">
+    <view class="header-top">
+      <view class="header-month" bindtap="showMonthPicker">
+        <text class="month-text">{{currentMonth}}月</text>
+        <text class="month-arrow">▼</text>
+      </view>
+      <view class="header-action">
+        <view class="icon-btn" bindtap="goToImport">
+          <text class="icon-text">↑</text>
+        </view>
+      </view>
+    </view>
+    <view class="header-stats">
+      <view class="stat-item">
+        <text class="stat-label">支出</text>
+        <text class="stat-amount">¥{{monthExpense}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">笔数</text>
+        <text class="stat-count">{{monthCount}}笔</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 消费记录列表 -->
+  <view class="expense-list">
+    <block wx:for="{{expenseList}}" wx:key="date">
+      <view class="date-group">
+        <view class="date-header">
+          <text class="date-text">{{item.date}}</text>
+          <text class="date-total">¥{{item.total}}</text>
+        </view>
+        <view class="date-items card card--flat">
+          <block wx:for="{{item.expenses}}" wx:for-item="expense" wx:key="id">
+            <view class="expense-item" bindtap="goToDetail" data-id="{{expense.id}}">
+              <view class="expense-icon">
+                <text class="icon-emoji">{{expense.categoryIcon}}</text>
+              </view>
+              <view class="expense-info">
+                <view class="expense-main">
+                  <text class="expense-category">{{expense.categoryName}}</text>
+                  <text class="expense-amount">-¥{{expense.amount}}</text>
+                </view>
+                <view class="expense-sub">
+                  <text class="expense-desc">{{expense.description || expense.subCategoryName}}</text>
+                  <view class="expense-tags" wx:if="{{expense.tags.length > 0}}">
+                    <text class="tag" wx:for="{{expense.tags}}" wx:for-item="tag" wx:key="id">{{tag.name}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载更多 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!loading && expenseList.length === 0}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">暂无消费记录</text>
+      <view class="btn btn--secondary btn--small mt-lg" bindtap="goToAdd">
+        <text>立即记账</text>
+      </view>
+    </view>
+
+    <!-- 加载完成 -->
+    <view class="load-end" wx:if="{{!loading && noMore && expenseList.length > 0}}">
+      <text class="load-end-text">— 已加载全部 —</text>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="fab" bindtap="goToAdd">
+    <text class="fab-icon">+</text>
+  </view>
+</view>
+
+<!-- 月份选择器 -->
+<view class="month-picker-mask" wx:if="{{showPicker}}" bindtap="hideMonthPicker">
+  <view class="month-picker" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择月份</text>
+      <text class="picker-close" bindtap="hideMonthPicker">✕</text>
+    </view>
+    <view class="picker-years">
+      <view class="year-item {{item === selectedYear ? 'active' : ''}}" 
+            wx:for="{{years}}" wx:key="*this"
+            bindtap="selectYear" data-year="{{item}}">
+        <text>{{item}}</text>
+      </view>
+    </view>
+    <view class="picker-months">
+      <view class="month-item {{item === selectedMonth ? 'active' : ''}}" 
+            wx:for="{{months}}" wx:key="*this"
+            bindtap="selectMonth" data-month="{{item}}">
+        <text>{{item}}月</text>
+      </view>
+    </view>
+    <view class="picker-footer">
+      <view class="btn btn--primary btn--block" bindtap="confirmMonth">
+        <text>确定</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,156 @@
+<!-- pages/category/index.wxml -->
+<view class="container container--white">
+  <!-- 模式切换 -->
+  <view class="mode-tabs" wx:if="{{showModeTabs}}">
+    <view class="tab {{mode === 'category' ? 'active' : ''}}" bindtap="setMode" data-mode="category">
+      <text>分类</text>
+    </view>
+    <view class="tab {{mode === 'tag' ? 'active' : ''}}" bindtap="setMode" data-mode="tag">
+      <text>标签</text>
+    </view>
+  </view>
+
+  <!-- 分类管理 -->
+  <view class="category-section" wx:if="{{mode === 'category'}}">
+    <!-- 添加按钮 -->
+    <view class="add-btn" bindtap="showAddCategory">
+      <text class="add-icon">+</text>
+      <text class="add-text">添加分类</text>
+    </view>
+
+    <!-- 分类列表 -->
+    <view class="category-list">
+      <view class="category-group" wx:for="{{categories}}" wx:key="id">
+        <!-- 一级分类 -->
+        <view class="category-header">
+          <view class="category-left">
+            <text class="category-icon">{{item.icon}}</text>
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-tag system" wx:if="{{item.isSystem}}">内置</text>
+          </view>
+          <view class="category-actions" wx:if="{{!item.isSystem}}">
+            <view class="action-btn" bindtap="editCategory" data-id="{{item.id}}">
+              <text>编辑</text>
+            </view>
+            <view class="action-btn delete" bindtap="deleteCategory" data-id="{{item.id}}">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 二级分类 -->
+        <view class="sub-category-list">
+          <view class="sub-item" wx:for="{{item.children}}" wx:for-item="sub" wx:key="id">
+            <view class="sub-left">
+              <text class="sub-icon">{{sub.icon}}</text>
+              <text class="sub-name">{{sub.name}}</text>
+            </view>
+            <view class="sub-actions" wx:if="{{!sub.isSystem}}">
+              <view class="action-btn small" bindtap="editSubCategory" data-id="{{sub.id}}" data-parent="{{item.id}}">
+                <text>编辑</text>
+              </view>
+              <view class="action-btn small delete" bindtap="deleteSubCategory" data-id="{{sub.id}}">
+                <text>删除</text>
+              </view>
+            </view>
+          </view>
+          <view class="add-sub-btn" bindtap="showAddSubCategory" data-parent="{{item.id}}" wx:if="{{!item.isSystem}}">
+            <text class="add-icon">+</text>
+            <text class="add-text">添加子分类</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签管理 -->
+  <view class="tag-section" wx:if="{{mode === 'tag'}}">
+    <!-- 添加按钮 -->
+    <view class="add-btn" bindtap="showAddTag">
+      <text class="add-icon">+</text>
+      <text class="add-text">添加标签</text>
+    </view>
+
+    <!-- 系统标签 -->
+    <view class="tag-group">
+      <view class="group-header">
+        <text class="group-title">系统标签</text>
+      </view>
+      <view class="tag-list">
+        <view class="tag-item" wx:for="{{systemTags}}" wx:key="id">
+          <text class="tag-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 自定义标签 -->
+    <view class="tag-group">
+      <view class="group-header">
+        <text class="group-title">自定义标签</text>
+      </view>
+      <view class="tag-list">
+        <view class="tag-item custom" wx:for="{{customTags}}" wx:key="id">
+          <text class="tag-name">{{item.name}}</text>
+          <view class="tag-delete" bindtap="deleteTag" data-id="{{item.id}}">
+            <text>✕</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{customTags.length === 0}}">
+        <text>暂无自定义标签</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 添加/编辑分类弹窗 -->
+<view class="modal-mask" wx:if="{{showCategoryModal}}" bindtap="hideCategoryModal">
+  <view class="modal" catchtap="noop">
+    <view class="modal-header">
+      <text class="modal-title">{{isEditCategory ? '编辑分类' : '添加分类'}}</text>
+      <text class="modal-close" bindtap="hideCategoryModal">✕</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">分类名称</text>
+        <input class="input" value="{{categoryName}}" placeholder="请输入分类名称" bindinput="onCategoryNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">图标</text>
+        <view class="icon-select">
+          <view class="icon-item {{item === selectedIcon ? 'active' : ''}}" 
+                wx:for="{{icons}}" wx:key="*this"
+                bindtap="selectIcon" data-icon="{{item}}">
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="btn btn--primary btn--block" bindtap="saveCategory">
+        <text>保存</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 添加标签弹窗 -->
+<view class="modal-mask" wx:if="{{showTagModal}}" bindtap="hideTagModal">
+  <view class="modal" catchtap="noop">
+    <view class="modal-header">
+      <text class="modal-title">添加标签</text>
+      <text class="modal-close" bindtap="hideTagModal">✕</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">标签名称</text>
+        <input class="input" value="{{tagName}}" placeholder="请输入标签名称" bindinput="onTagNameInput" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="btn btn--primary btn--block" bindtap="saveTag">
+        <text>保存</text>
+      </view>
+    </view>
+  </view>
+</view>

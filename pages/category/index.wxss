@@ -1,0 +1,284 @@
+/* pages/category/index.wxss */
+
+/* 模式切换 */
+.mode-tabs {
+  display: flex;
+  background: var(--color-bg);
+  border-radius: 8rpx;
+  padding: 4rpx;
+  margin-bottom: 32rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: var(--color-text-light);
+  border-radius: 6rpx;
+}
+
+.tab.active {
+  background: var(--color-primary);
+  color: #FFFFFF;
+}
+
+/* 添加按钮 */
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  background: var(--color-bg);
+  border-radius: 8rpx;
+  margin-bottom: 32rpx;
+}
+
+.add-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  color: var(--color-text-light);
+}
+
+.add-text {
+  font-size: 28rpx;
+  color: var(--color-text-light);
+}
+
+/* 分类列表 */
+.category-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-group {
+  margin-bottom: 32rpx;
+  background: var(--color-bg-white);
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  background: var(--color-bg);
+}
+
+.category-left {
+  display: flex;
+  align-items: center;
+}
+
+.category-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.category-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  margin-right: 16rpx;
+}
+
+.category-tag {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.category-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  padding: 8rpx 16rpx;
+  background: var(--color-bg-white);
+  border-radius: 4rpx;
+  font-size: 22rpx;
+}
+
+.action-btn.small {
+  padding: 4rpx 12rpx;
+  font-size: 20rpx;
+}
+
+.action-btn.delete {
+  color: var(--color-danger);
+}
+
+/* 子分类列表 */
+.sub-category-list {
+  padding: 0 24rpx;
+}
+
+.sub-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.sub-item:last-child {
+  border-bottom: none;
+}
+
+.sub-left {
+  display: flex;
+  align-items: center;
+}
+
+.sub-icon {
+  font-size: 28rpx;
+  margin-right: 16rpx;
+}
+
+.sub-name {
+  font-size: 26rpx;
+}
+
+.sub-actions {
+  display: flex;
+  gap: 12rpx;
+}
+
+.add-sub-btn {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.add-sub-btn .add-icon {
+  font-size: 24rpx;
+  margin-right: 8rpx;
+}
+
+.add-sub-btn .add-text {
+  font-size: 24rpx;
+}
+
+/* 标签分组 */
+.tag-group {
+  margin-bottom: 32rpx;
+}
+
+.group-header {
+  margin-bottom: 16rpx;
+}
+
+.group-title {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: var(--color-bg);
+  border-radius: 4rpx;
+}
+
+.tag-item.custom {
+  background: var(--color-bg-white);
+  border: 1rpx solid var(--color-border);
+}
+
+.tag-name {
+  font-size: 26rpx;
+}
+
+.tag-delete {
+  margin-left: 12rpx;
+  padding: 4rpx;
+  color: var(--color-text-muted);
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 40rpx;
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 80%;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.modal-close {
+  font-size: 32rpx;
+  color: var(--color-text-muted);
+  padding: 8rpx;
+}
+
+.modal-body {
+  padding: 32rpx;
+}
+
+.modal-footer {
+  padding: 24rpx 32rpx 32rpx;
+}
+
+/* 图标选择 */
+.icon-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.icon-item {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border-radius: 8rpx;
+  font-size: 36rpx;
+}
+
+.icon-item.active {
+  background: var(--color-primary);
+}

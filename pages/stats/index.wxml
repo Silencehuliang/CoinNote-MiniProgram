@@ -1,0 +1,182 @@
+<!-- pages/stats/index.wxml -->
+<view class="container container--gray">
+  <!-- 时间范围选择 -->
+  <view class="time-filter card">
+    <view class="filter-tabs">
+      <view class="tab {{timeRange === 'month' ? 'active' : ''}}" bindtap="setTimeRange" data-range="month">
+        <text>月</text>
+      </view>
+      <view class="tab {{timeRange === 'year' ? 'active' : ''}}" bindtap="setTimeRange" data-range="year">
+        <text>年</text>
+      </view>
+      <view class="tab {{timeRange === 'custom' ? 'active' : ''}}" bindtap="setTimeRange" data-range="custom">
+        <text>自定义</text>
+      </view>
+    </view>
+    
+    <view class="time-display" bindtap="showDatePicker">
+      <text class="time-text">{{displayTime}}</text>
+      <text class="time-arrow">▼</text>
+    </view>
+  </view>
+
+  <!-- 总计卡片 -->
+  <view class="total-card card">
+    <view class="total-header">
+      <text class="total-label">总支出</text>
+      <text class="total-period">{{displayTime}}</text>
+    </view>
+    <text class="total-amount">¥{{totalAmount}}</text>
+    <view class="total-meta">
+      <text class="meta-item">{{totalCount}}笔</text>
+      <text class="meta-divider">·</text>
+      <text class="meta-item">日均¥{{dailyAvg}}</text>
+    </view>
+  </view>
+
+  <!-- 统计维度切换 -->
+  <view class="dimension-tabs card card--flat">
+    <view class="dim-tab {{dimension === 'category' ? 'active' : ''}}" bindtap="setDimension" data-dim="category">
+      <text>分类</text>
+    </view>
+    <view class="dim-tab {{dimension === 'user' ? 'active' : ''}}" bindtap="setDimension" data-dim="user">
+      <text>成员</text>
+    </view>
+    <view class="dim-tab {{dimension === 'tag' ? 'active' : ''}}" bindtap="setDimension" data-dim="tag">
+      <text>标签</text>
+    </view>
+    <view class="dim-tab {{dimension === 'time' ? 'active' : ''}}" bindtap="setDimension" data-dim="time">
+      <text>趋势</text>
+    </view>
+  </view>
+
+  <!-- 分类统计 -->
+  <view class="stats-content" wx:if="{{dimension === 'category'}}">
+    <!-- 饼图 -->
+    <view class="chart-card card">
+      <canvas canvas-id="pieChart" id="pieChart" class="pie-chart" />
+    </view>
+    
+    <!-- 分类列表 -->
+    <view class="rank-list card">
+      <view class="rank-item" wx:for="{{categoryStats}}" wx:key="categoryId">
+        <view class="rank-left">
+          <text class="rank-icon">{{item.categoryIcon}}</text>
+          <view class="rank-info">
+            <text class="rank-name">{{item.categoryName}}</text>
+            <text class="rank-count">{{item.count}}笔</text>
+          </view>
+        </view>
+        <view class="rank-right">
+          <text class="rank-amount">¥{{item.amount}}</text>
+          <view class="rank-bar">
+            <view class="bar-fill" style="width: {{item.percentage}}%"></view>
+          </view>
+          <text class="rank-percent">{{item.percentage}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成员统计 -->
+  <view class="stats-content" wx:if="{{dimension === 'user'}}">
+    <view class="member-stats card">
+      <view class="member-item" wx:for="{{userStats}}" wx:key="userId">
+        <view class="member-left">
+          <image class="member-avatar" src="{{item.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+          <view class="member-info">
+            <text class="member-name">{{item.nickname}}</text>
+            <text class="member-count">{{item.count}}笔</text>
+          </view>
+        </view>
+        <view class="member-right">
+          <text class="member-amount">¥{{item.amount}}</text>
+          <text class="member-percent">{{item.percentage}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签统计 -->
+  <view class="stats-content" wx:if="{{dimension === 'tag'}}">
+    <view class="tag-stats card">
+      <view class="tag-item" wx:for="{{tagStats}}" wx:key="tagId">
+        <view class="tag-info">
+          <text class="tag-name">#{{item.tagName}}</text>
+          <text class="tag-count">{{item.count}}笔</text>
+        </view>
+        <text class="tag-amount">¥{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 趋势统计 -->
+  <view class="stats-content" wx:if="{{dimension === 'time'}}">
+    <view class="chart-card card">
+      <canvas canvas-id="lineChart" id="lineChart" class="line-chart" />
+    </view>
+    
+    <view class="trend-list card">
+      <view class="trend-item" wx:for="{{timeStats}}" wx:key="date">
+        <text class="trend-date">{{item.date}}</text>
+        <text class="trend-amount">¥{{item.amount}}</text>
+        <text class="trend-count">{{item.count}}笔</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出按钮 -->
+  <view class="export-btn" bindtap="exportData">
+    <text>导出报表</text>
+  </view>
+</view>
+
+<!-- 日期选择器弹窗 -->
+<view class="date-picker-mask" wx:if="{{showPicker}}" bindtap="hideDatePicker">
+  <view class="date-picker" catchtap="noop">
+    <!-- 月份选择 -->
+    <view class="picker-section" wx:if="{{timeRange === 'month'}}">
+      <view class="picker-header">
+        <text class="picker-title">选择月份</text>
+        <text class="picker-close" bindtap="hideDatePicker">✕</text>
+      </view>
+      <picker-view class="picker-view" value="{{pickerValue}}" bindchange="onPickerChange">
+        <picker-view-column>
+          <view class="picker-item" wx:for="{{years}}" wx:key="*this">{{item}}年</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-item" wx:for="{{months}}" wx:key="*this">{{item}}月</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+    
+    <!-- 自定义日期范围 -->
+    <view class="picker-section" wx:if="{{timeRange === 'custom'}}">
+      <view class="picker-header">
+        <text class="picker-title">选择日期范围</text>
+        <text class="picker-close" bindtap="hideDatePicker">✕</text>
+      </view>
+      <view class="date-range">
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+          <view class="range-item">
+            <text class="range-label">开始</text>
+            <text class="range-value">{{startDate}}</text>
+          </view>
+        </picker>
+        <text class="range-divider">至</text>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+          <view class="range-item">
+            <text class="range-label">结束</text>
+            <text class="range-value">{{endDate}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    
+    <view class="picker-footer">
+      <view class="btn btn--primary btn--block" bindtap="confirmDate">
+        <text>确定</text>
+      </view>
+    </view>
+  </view>
+</view>

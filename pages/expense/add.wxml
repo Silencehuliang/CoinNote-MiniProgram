@@ -1,0 +1,130 @@
+<!-- pages/expense/add.wxml -->
+<view class="container container--white">
+  <!-- 金额输入 -->
+  <view class="amount-section">
+    <view class="amount-prefix">¥</view>
+    <input class="amount-input" 
+           type="digit" 
+           value="{{amount}}" 
+           placeholder="0.00"
+           placeholder-style="color: #E5E5E5"
+           bindinput="onAmountInput"
+           focus="{{autoFocus}}" />
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="section">
+    <view class="section-title">分类</view>
+    <scroll-view class="category-scroll" scroll-x enable-flex>
+      <view class="category-list">
+        <view class="category-item {{item.id === selectedCategory ? 'active' : ''}}"
+              wx:for="{{categories}}" wx:key="id"
+              bindtap="selectCategory" data-id="{{item.id}}">
+          <text class="category-icon">{{item.icon}}</text>
+          <text class="category-name">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    
+    <!-- 二级分类 -->
+    <view class="sub-categories" wx:if="{{subCategories.length > 0}}">
+      <view class="sub-item {{item.id === selectedSubCategory ? 'active' : ''}}"
+            wx:for="{{subCategories}}" wx:key="id"
+            bindtap="selectSubCategory" data-id="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日期选择 -->
+  <view class="section">
+    <view class="section-title">日期</view>
+    <picker mode="date" value="{{date}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text class="date-text">{{date}}</text>
+        <text class="date-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 备注 -->
+  <view class="section">
+    <view class="section-title">备注</view>
+    <textarea class="desc-input" 
+              value="{{description}}" 
+              placeholder="添加备注..."
+              placeholder-style="color: #E5E5E5"
+              bindinput="onDescInput"
+              maxlength="100" />
+  </view>
+
+  <!-- 标签选择 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">标签</text>
+      <text class="section-action" bindtap="goToManageTag">管理</text>
+    </view>
+    <view class="tag-list">
+      <view class="tag-item {{item.selected ? 'active' : ''}}"
+            wx:for="{{tags}}" wx:key="id"
+            bindtap="toggleTag" data-index="{{index}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 家庭成员选择（如果有家庭） -->
+  <view class="section" wx:if="{{familyMembers.length > 0}}">
+    <view class="section-title">记账人</view>
+    <scroll-view class="member-scroll" scroll-x enable-flex>
+      <view class="member-list">
+        <view class="member-item {{item.id === selectedMember ? 'active' : ''}}"
+              wx:for="{{familyMembers}}" wx:key="id"
+              bindtap="selectMember" data-id="{{item.id}}">
+          <image class="member-avatar" src="{{item.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+          <text class="member-name">{{item.nickname}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="bottom-bar">
+    <view class="btn btn--primary btn--block {{!canSave ? 'disabled' : ''}}" bindtap="saveExpense">
+      <text>保存</text>
+    </view>
+  </view>
+</view>
+
+<!-- 自定义数字键盘 -->
+<view class="keyboard-mask" wx:if="{{showKeyboard}}" bindtap="hideKeyboard">
+  <view class="keyboard" catchtap="noop">
+    <view class="keyboard-row">
+      <view class="key" bindtap="inputKey" data-key="1"><text>1</text></view>
+      <view class="key" bindtap="inputKey" data-key="2"><text>2</text></view>
+      <view class="key" bindtap="inputKey" data-key="3"><text>3</text></view>
+    </view>
+    <view class="keyboard-row">
+      <view class="key" bindtap="inputKey" data-key="4"><text>4</text></view>
+      <view class="key" bindtap="inputKey" data-key="5"><text>5</text></view>
+      <view class="key" bindtap="inputKey" data-key="6"><text>6</text></view>
+    </view>
+    <view class="keyboard-row">
+      <view class="key" bindtap="inputKey" data-key="7"><text>7</text></view>
+      <view class="key" bindtap="inputKey" data-key="8"><text>8</text></view>
+      <view class="key" bindtap="inputKey" data-key="9"><text>9</text></view>
+    </view>
+    <view class="keyboard-row">
+      <view class="key" bindtap="inputKey" data-key="."><text>.</text></view>
+      <view class="key" bindtap="inputKey" data-key="0"><text>0</text></view>
+      <view class="key key--delete" bindtap="deleteKey">
+        <text>⌫</text>
+      </view>
+    </view>
+    <view class="keyboard-row">
+      <view class="key key--confirm" bindtap="confirmAmount">
+        <text>确定</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,175 @@
+<!-- pages/import/index.wxml -->
+<view class="container container--gray">
+  <!-- 模式切换 -->
+  <view class="mode-tabs card">
+    <view class="tab {{mode === 'import' ? 'active' : ''}}" bindtap="setMode" data-mode="import">
+      <text>导入</text>
+    </view>
+    <view class="tab {{mode === 'export' ? 'active' : ''}}" bindtap="setMode" data-mode="export">
+      <text>导出</text>
+    </view>
+  </view>
+
+  <!-- 导入模式 -->
+  <view class="import-section" wx:if="{{mode === 'import'}}">
+    <!-- 模板下载 -->
+    <view class="template-card card">
+      <view class="template-header">
+        <view class="template-info">
+          <text class="template-title">导入模板</text>
+          <text class="template-desc">下载模板填写数据后导入</text>
+        </view>
+        <view class="btn btn--secondary btn--small" bindtap="downloadTemplate">
+          <text>下载模板</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 文件上传 -->
+    <view class="upload-card card">
+      <view class="upload-area" bindtap="chooseFile">
+        <view class="upload-icon" wx:if="{{!selectedFile}}">
+          <text class="icon-text">📁</text>
+        </view>
+        <view class="file-info" wx:if="{{selectedFile}}">
+          <text class="file-icon">📄</text>
+          <text class="file-name">{{selectedFile.name}}</text>
+          <text class="file-size">{{selectedFile.size}}</text>
+        </view>
+        <text class="upload-text" wx:if="{{!selectedFile}}">点击选择Excel文件</text>
+        <text class="upload-hint" wx:if="{{!selectedFile}}">支持 .xlsx 格式</text>
+      </view>
+    </view>
+
+    <!-- 导入选项 -->
+    <view class="options-card card" wx:if="{{selectedFile}}">
+      <view class="option-item">
+        <text class="option-label">导入范围</text>
+        <view class="option-value">
+          <picker bindchange="onRangeChange" value="{{rangeIndex}}" range="{{ranges}}">
+            <text class="picker-text">{{ranges[rangeIndex]}}</text>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <!-- 导入结果 -->
+    <view class="result-card card" wx:if="{{importResult}}">
+      <view class="result-header">
+        <text class="result-title">导入结果</text>
+      </view>
+      <view class="result-stats">
+        <view class="result-item success">
+          <text class="result-value">{{importResult.successCount}}</text>
+          <text class="result-label">成功</text>
+        </view>
+        <view class="result-item fail" wx:if="{{importResult.failCount > 0}}">
+          <text class="result-value">{{importResult.failCount}}</text>
+          <text class="result-label">失败</text>
+        </view>
+      </view>
+      <view class="result-errors" wx:if="{{importResult.errors.length > 0}}">
+        <text class="error-title">错误详情：</text>
+        <view class="error-item" wx:for="{{importResult.errors}}" wx:key="row">
+          <text class="error-row">第{{item.row}}行：</text>
+          <text class="error-msg">{{item.message}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-bar">
+      <view class="btn btn--primary btn--block {{!selectedFile || importing ? 'disabled' : ''}}" bindtap="startImport">
+        <text>{{importing ? '导入中...' : '开始导入'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出模式 -->
+  <view class="export-section" wx:if="{{mode === 'export'}}">
+    <!-- 日期范围 -->
+    <view class="range-card card">
+      <view class="section-header">
+        <text class="section-title">导出范围</text>
+      </view>
+      <view class="range-options">
+        <view class="range-item {{exportRange === 'month' ? 'active' : ''}}" bindtap="setExportRange" data-range="month">
+          <text>本月</text>
+        </view>
+        <view class="range-item {{exportRange === 'year' ? 'active' : ''}}" bindtap="setExportRange" data-range="year">
+          <text>本年</text>
+        </view>
+        <view class="range-item {{exportRange === 'all' ? 'active' : ''}}" bindtap="setExportRange" data-range="all">
+          <text>全部</text>
+        </view>
+        <view class="range-item {{exportRange === 'custom' ? 'active' : ''}}" bindtap="setExportRange" data-range="custom">
+          <text>自定义</text>
+        </view>
+      </view>
+
+      <!-- 自定义日期 -->
+      <view class="custom-range" wx:if="{{exportRange === 'custom'}}">
+        <view class="date-picker">
+          <picker mode="date" value="{{exportStartDate}}" bindchange="onExportStartDateChange">
+            <view class="picker-item">
+              <text class="picker-label">开始</text>
+              <text class="picker-value">{{exportStartDate}}</text>
+            </view>
+          </picker>
+        </view>
+        <text class="range-divider">至</text>
+        <view class="date-picker">
+          <picker mode="date" value="{{exportEndDate}}" bindchange="onExportEndDateChange">
+            <view class="picker-item">
+              <text class="picker-label">结束</text>
+              <text class="picker-value">{{exportEndDate}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <!-- 导出选项 -->
+    <view class="options-card card">
+      <view class="option-item">
+        <text class="option-label">导出格式</text>
+        <view class="option-value">
+          <text>Excel (.xlsx)</text>
+        </view>
+      </view>
+      <view class="option-item">
+        <text class="option-label">包含标签</text>
+        <switch checked="{{includeTags}}" bindchange="toggleTags" color="#000000" />
+      </view>
+      <view class="option-item">
+        <text class="option-label">包含备注</text>
+        <switch checked="{{includeDesc}}" bindchange="toggleDesc" color="#000000" />
+      </view>
+    </view>
+
+    <!-- 导出历史 -->
+    <view class="history-card card" wx:if="{{exportHistory.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">导出历史</text>
+      </view>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{exportHistory}}" wx:key="id">
+          <view class="history-info">
+            <text class="history-date">{{item.createdAt}}</text>
+            <text class="history-range">{{item.startDate}} 至 {{item.endDate}}</text>
+          </view>
+          <view class="history-action" bindtap="downloadExport" data-url="{{item.fileUrl}}">
+            <text>下载</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-bar">
+      <view class="btn btn--primary btn--block {{exporting ? 'disabled' : ''}}" bindtap="startExport">
+        <text>{{exporting ? '导出中...' : '导出数据'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

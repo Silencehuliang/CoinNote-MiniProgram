@@ -1,0 +1,54 @@
+<!-- pages/expense/detail.wxml -->
+<view class="container container--white">
+  <!-- 金额显示 -->
+  <view class="amount-section">
+    <view class="amount-header">
+      <text class="category-icon">{{expense.categoryIcon}}</text>
+      <text class="category-name">{{expense.categoryName}}</text>
+    </view>
+    <text class="amount-value">-¥{{expense.amount}}</text>
+  </view>
+
+  <!-- 详细信息 -->
+  <view class="detail-section">
+    <view class="detail-item">
+      <text class="detail-label">二级分类</text>
+      <text class="detail-value">{{expense.subCategoryName || '-'}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="detail-label">日期</text>
+      <text class="detail-value">{{expense.date}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="detail-label">记录人</text>
+      <view class="user-info">
+        <image class="user-avatar" src="{{expense.userAvatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <text class="user-name">{{expense.userName}}</text>
+      </view>
+    </view>
+    <view class="detail-item" wx:if="{{expense.description}}">
+      <text class="detail-label">备注</text>
+      <text class="detail-value">{{expense.description}}</text>
+    </view>
+    <view class="detail-item" wx:if="{{expense.tags.length > 0}}">
+      <text class="detail-label">标签</text>
+      <view class="tag-list">
+        <text class="tag" wx:for="{{expense.tags}}" wx:key="id">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="detail-item">
+      <text class="detail-label">创建时间</text>
+      <text class="detail-value">{{expense.createdAt}}</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <view class="btn btn--secondary btn--block" bindtap="editExpense">
+      <text>编辑</text>
+    </view>
+    <view class="btn btn--ghost btn--block mt-lg" bindtap="deleteExpense">
+      <text>删除</text>
+    </view>
+  </view>
+</view>
